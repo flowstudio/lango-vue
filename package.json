@@ -30,10 +30,8 @@
 	"homepage": "https://github.com/flowstudio/lango-vue#readme",
 	"author": "adamcikado",
 	"license": "MIT",
-	"dependencies": {
-		"lango": "^1.0.0"
-	},
 	"devDependencies": {
+		"lango": "^1.0.0",
 		"babel-core": "^6.24.1",
 		"babel-loader": "^7.1.3",
 		"babel-plugin-syntax-dynamic-import": "^6.18.0",
