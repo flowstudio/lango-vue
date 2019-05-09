@@ -1,4 +1,4 @@
 import Lango from './lango';
-import install from './install';
+import {install} from './install';
 
 export {Lango, install};
