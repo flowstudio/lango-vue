@@ -1,5 +1,5 @@
 /*!
-  * vue-router v1.0.0
+  * vue-router v1.0.1
   * (c) 2019 Evan You
   * @license MIT
   */
