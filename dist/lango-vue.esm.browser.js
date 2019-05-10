@@ -1,5 +1,5 @@
 /*!
-  * vue-router v1.0.3
+  * vue-router v1.0.5
   * (c) 2019 Evan You
   * @license MIT
   */
@@ -324,18 +324,16 @@ var setLocale = function(i18n, name) {
 		return Promise.resolve();
 	}
 
-	if (locale.loadPromise) {
-		return locale.loadPromise.then(() => {
-			this.locale = name;
-			this === i18n && this.emit('update');
+	if (!locale.loadPromise) {
+		if (!i18n.driver) {
+			throw new Error('No language driver provided.');
+		}
+
+		locale.loadPromise = i18n.driver.load(name, i18n.namespace).then(data => {
+			locale.setup(data);
+			locale.loadPromise = null;
 		});
 	}
-
-	if (!i18n.driver) {
-		throw new Error('No language driver provided.');
-	}
-
-	locale.loadPromise = i18n.driver.load(name, i18n.namespace);
 
 	return locale.loadPromise.then(() => {
 		this.locale = name;
@@ -533,7 +531,8 @@ var lango = class Lango {
 			return a.quality - b.quality;
 		});
 
-		for (let locale$$1 in requested) {
+		for (let i = 0; i < requested.length; i++) {
+			let locale$$1 = requested[i];
 			if (this.hasLocale(locale$$1.locale)) {
 				return locale$$1.locale;
 			} else if (this.hasFallbackLocale(locale$$1.locale)) {
