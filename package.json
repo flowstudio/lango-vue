@@ -1,6 +1,6 @@
 {
 	"name": "lango-vue",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "Lightweight simple translation module for node.js and browser.",
 	"main": "dist/lango-vue.common.js",
 	"module": "dist/lango-vue.esm.js",
