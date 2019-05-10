@@ -1,5 +1,5 @@
 /*!
-  * vue-router v1.0.2
+  * vue-router v1.0.3
   * (c) 2019 Evan You
   * @license MIT
   */
@@ -684,32 +684,6 @@ var lango = /*@__PURE__*/(function () {
 	return Lango;
 }());
 
-var LangoVue = /*@__PURE__*/(function (Lango) {
-	function LangoVue () {
-		Lango.apply(this, arguments);
-	}
-
-	if ( Lango ) LangoVue.__proto__ = Lango;
-	LangoVue.prototype = Object.create( Lango && Lango.prototype );
-	LangoVue.prototype.constructor = LangoVue;
-
-	LangoVue.prototype.subscribeData = function subscribeData (vm) {
-		vm._i18nListener = vm._i18nListener || (function () {
-			vm.$nextTick(function() {
-				this.$forceUpdate();
-			});
-		});
-
-		this.on('update', vm._i18nListener);
-	};
-	
-	LangoVue.prototype.unsubscribeData = function unsubscribeData (vm) {
-		this.off('update', vm._i18nListener);
-	};
-
-	return LangoVue;
-}(lango));
-
 function extend(Vue) {
 	Object.defineProperty(Vue.prototype, '$i18n', {
 		get: function get() {
@@ -767,4 +741,32 @@ function install(_Vue) {
 	Vue.mixin(mixin);
 }
 
-export { LangoVue as Lango, install };
+var LangoVue = /*@__PURE__*/(function (Lango) {
+	function LangoVue () {
+		Lango.apply(this, arguments);
+	}
+
+	if ( Lango ) LangoVue.__proto__ = Lango;
+	LangoVue.prototype = Object.create( Lango && Lango.prototype );
+	LangoVue.prototype.constructor = LangoVue;
+
+	LangoVue.prototype.subscribeData = function subscribeData (vm) {
+		vm._i18nListener = vm._i18nListener || (function () {
+			vm.$nextTick(function() {
+				this.$forceUpdate();
+			});
+		});
+
+		this.on('update', vm._i18nListener);
+	};
+	
+	LangoVue.prototype.unsubscribeData = function unsubscribeData (vm) {
+		this.off('update', vm._i18nListener);
+	};
+
+	return LangoVue;
+}(lango));
+
+LangoVue.install = install;
+
+export default LangoVue;

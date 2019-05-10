@@ -1,5 +1,5 @@
 /*!
-  * vue-router v1.0.2
+  * vue-router v1.0.3
   * (c) 2019 Evan You
   * @license MIT
   */
@@ -662,22 +662,6 @@ var lango = class Lango {
 	}
 };
 
-class LangoVue extends lango {
-	subscribeData(vm) {
-		vm._i18nListener = vm._i18nListener || (() => {
-			vm.$nextTick(function() {
-				this.$forceUpdate();
-			});
-		});
-
-		this.on('update', vm._i18nListener);
-	}
-	
-	unsubscribeData(vm) {
-		this.off('update', vm._i18nListener);
-	}
-}
-
 function extend(Vue) {
 	Object.defineProperty(Vue.prototype, '$i18n', {
 		get() {
@@ -735,4 +719,21 @@ function install(_Vue) {
 	Vue.mixin(mixin);
 }
 
-export { LangoVue as Lango, install };
+class LangoVue extends lango {
+	subscribeData(vm) {
+		vm._i18nListener = vm._i18nListener || (() => {
+			vm.$nextTick(function() {
+				this.$forceUpdate();
+			});
+		});
+
+		this.on('update', vm._i18nListener);
+	}
+	
+	unsubscribeData(vm) {
+		this.off('update', vm._i18nListener);
+	}
+}
+LangoVue.install = install;
+
+export default LangoVue;
