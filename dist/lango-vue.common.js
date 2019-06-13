@@ -1,5 +1,5 @@
 /*!
-  * vue-router v1.0.5
+  * vue-router v1.0.6
   * (c) 2019 Evan You
   * @license MIT
   */
@@ -548,7 +548,11 @@ var lango = /*@__PURE__*/(function () {
 				quality: data[1] ? parseFloat(data[1]) || 0.0 : 1.0,
 			};
 		}).sort(function (a, b) {
-			return a.quality - b.quality;
+			if (a.quality === b.quality) {
+				return 0;
+			}
+			
+			return a.quality > b.quality ? -1 : 1;
 		});
 
 		for (var i = 0; i < requested.length; i++) {
