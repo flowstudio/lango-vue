@@ -1,5 +1,5 @@
 /*!
-  * vue-router v1.0.6
+  * vue-router v1.0.7
   * (c) 2019 Evan You
   * @license MIT
   */
@@ -462,8 +462,8 @@ var lango = class Lango {
 
 		const args = Array.prototype.slice.call(arguments, 1);
 
-		for (let i = 0; i < this.listeners.length; i++) {
-			this.listeners[i].apply(args);
+		for (let i = 0; i < listeners.length; i++) {
+			listeners[i].apply(args);
 		}
 	}
 	
